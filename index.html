@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meng Xi Ping — Photography</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400&family=Space+Mono&family=Dancing+Script:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F9F7F4;
+      --text: #1A1410;
+      --muted: #9A8E82;
+      --border: #E2D9CC;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 24px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { display: flex; flex-direction: column; gap: 4px; }
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 300; letter-spacing: 5px;
+      text-transform: uppercase; color: rgba(255,255,255,0.75);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+    }
+    .nav-tagline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,0.55); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: rgba(255,255,255,0.9); }
+
+    /* HERO — vintage photo on dark */
+    .hero {
+      min-height: 100vh;
+      background: #3D2A1A;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 60px 64px;
+      gap: 0;
+    }
+    .hero-photo-frame {
+      background: #F4EFE6;
+      padding: 14px 14px 48px;
+      box-shadow: 0 16px 60px rgba(0,0,0,0.55), 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .hero-photo-frame img {
+      display: block;
+      max-height: 62vh;
+      max-width: 72vw;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+    .hero-caption {
+      margin-top: 32px;
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(16px, 2vw, 22px);
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+    .hero-caption-zh {
+      margin-top: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 4px;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+    }
+
+    /* GRID — pinboard */
+    .grid-section { padding: 80px 48px; max-width: 1400px; margin: 0 auto; }
+    .sec-label {
+      font-size: 8px; letter-spacing: 6px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 40px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .grid-item {
+      background: #fff;
+      aspect-ratio: 3/4;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.05);
+      transition: box-shadow 0.25s, opacity 0.25s;
+    }
+    .grid-item:not(.blank)::before {
+      content: '';
+      position: absolute;
+      top: 11px; left: 50%;
+      transform: translateX(-50%);
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #C0B8B0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.28);
+      z-index: 10;
+    }
+    .grid-item img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: opacity 0.3s;
+    }
+    .grid-item:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.13), 0 2px 6px rgba(0,0,0,0.07); }
+    .grid-item:hover img { opacity: 0.9; }
+    .grid-item.blank { cursor: default; }
+    .grid-item.blank:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.05); }
+
+    /* ABOUT */
+    .about {
+      min-height: 100vh;
+      border-top: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 120px 48px;
+      text-align: center;
+    }
+    .about-monogram {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px; letter-spacing: 8px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 72px;
+    }
+    .about-portrait {
+      width: 150px; height: 190px;
+      object-fit: cover; object-position: center top;
+      display: block; margin-bottom: 48px;
+    }
+    .about-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px; letter-spacing: 7px; text-transform: uppercase;
+      font-weight: 300; margin-bottom: 32px; color: var(--text);
+    }
+    .about-bio {
+      font-size: 12px; line-height: 2; color: #4A4038;
+      max-width: 460px; margin-bottom: 10px;
+    }
+    .about-bio-zh {
+      font-size: 11px; line-height: 2.2; color: #7A6E64;
+      max-width: 460px; margin-bottom: 48px;
+    }
+    .about-tags {
+      display: flex; gap: 24px; justify-content: center;
+      flex-wrap: wrap; margin-top: 16px;
+    }
+    .about-tag {
+      font-size: 8px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--muted); padding: 6px 0; border-top: 1px solid var(--border);
+    }
+
+    /* PROCESS */
+    .process {
+      padding: 80px 48px; border-top: 1px solid var(--border);
+      max-width: 1400px; margin: 0 auto;
+    }
+    .process-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 56px; }
+    .process-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.5vw, 46px); font-weight: 300; line-height: 1.2;
+    }
+    .process-title em { font-style: italic; color: var(--muted); }
+    .process-sub { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); }
+    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 64px; }
+    .step-num { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 16px; letter-spacing: 2px; }
+    .step-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; margin-bottom: 10px; }
+    .step-name-zh { font-size: 11px; letter-spacing: 3px; color: var(--muted); margin-bottom: 14px; text-transform: uppercase; }
+    .step-desc { font-size: 12px; line-height: 1.9; color: #4A4038; }
+    .step-desc-zh { font-size: 11px; line-height: 2; color: #7A6E64; margin-top: 6px; }
+    .packages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-top: 1px solid var(--border); padding-top: 48px; }
+    .pkg { padding: 36px 32px; border-right: 1px solid var(--border); }
+    .pkg:last-child { border-right: none; }
+    .pkg-label { font-size: 8px; letter-spacing: 5px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+    .pkg-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; margin-bottom: 6px; }
+    .pkg-name-zh { font-size: 11px; letter-spacing: 2px; color: var(--muted); margin-bottom: 24px; }
+    .pkg-features { list-style: none; }
+    .pkg-features li { font-size: 12px; line-height: 1.8; color: #4A4038; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .pkg-features li:last-child { border-bottom: none; }
+    .pkg-features li::before { content: '—  '; color: var(--muted); font-size: 10px; }
+    .pkg-price {
+      font-family: 'Space Mono', monospace;
+      font-size: 22px; letter-spacing: 1px;
+      margin: 24px 0 4px;
+      color: var(--text);
+    }
+    .pkg-price-sub { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+    .pkg-note { font-size: 10px; color: var(--muted); margin-top: 20px; letter-spacing: 1px; }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+      .packages { grid-template-columns: 1fr; }
+      .pkg { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+
+    /* CONTACT */
+    .contact {
+      padding: 80px 48px; background: #2C1F14; color: var(--bg);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .contact-left h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(32px, 4.5vw, 58px); font-weight: 300; line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .contact-left h2 em { font-style: normal; opacity: 0.4; font-weight: 300; }
+    .contact-email {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px; letter-spacing: 1px; color: rgba(249,247,244,0.6);
+    }
+    .contact-right { text-align: right; }
+    .contact-ig { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.5; margin-bottom: 8px; }
+    .contact-ig a { color: inherit; text-decoration: none; }
+    .contact-ig a:hover { opacity: 1; }
+    .contact-location { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; opacity: 0.3; }
+
+    /* LIGHTBOX */
+    .lb { position: fixed; inset: 0; background: rgba(10,8,6,0.94); z-index: 500; display: none; align-items: center; justify-content: center; }
+    .lb.open { display: flex; }
+    .lb img { max-height: 90vh; max-width: 90vw; object-fit: contain; }
+    .lb-close { position: absolute; top: 24px; right: 32px; color: rgba(255,255,255,0.6); font-size: 22px; cursor: pointer; background: none; border: none; }
+    .lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,255,255,0.5); font-size: 28px; cursor: pointer; padding: 20px; }
+    .lb-prev { left: 16px; }
+    .lb-next { right: 16px; }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .hero { padding: 80px 24px 28px; }
+      .hero-title { font-size: clamp(36px, 9vw, 64px); letter-spacing: 8px; }
+      .grid-section, .about, .contact { padding: 56px 24px; }
+      .about { grid-template-columns: 1fr; gap: 40px; }
+      .contact { flex-direction: column; gap: 32px; text-align: left; }
+      .contact-right { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <span class="nav-name">Meng Xi Ping</span>
+    <span class="nav-tagline">restaurant and space photography</span>
+  </div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#process">Services</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-photo-frame">
+    <img src="DSC08503.JPG" alt="">
+  </div>
+  <p class="hero-caption">every space holds a story worth remembering</p>
+  <p class="hero-caption-zh">每個空間都藏著值得記憶的故事</p>
+</section>
+
+<!-- WORK -->
+<section class="grid-section" id="work">
+  <div class="sec-label">Selected Work — Restaurants & Cafés</div>
+  <div class="grid" id="photoGrid">
+    <div class="grid-item" data-src="DSC07955.JPG"><img src="DSC07955.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC07971.JPG"><img src="DSC07971.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC07973.JPG"><img src="DSC07973.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08093.JPG"><img src="DSC08093.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08100.JPG"><img src="DSC08100.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08103.JPG"><img src="DSC08103.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08130.JPG"><img src="DSC08130.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08135.JPG"><img src="DSC08135.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08158.JPG"><img src="DSC08158.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08170.JPG"><img src="DSC08170.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08172.JPG"><img src="DSC08172.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08245.JPG"><img src="DSC08245.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08257.JPG"><img src="DSC08257.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08394.JPG"><img src="DSC08394.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08497.JPG"><img src="DSC08497.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08507.JPG"><img src="DSC08507.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08516.JPG"><img src="DSC08516.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08703.JPG"><img src="DSC08703.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC08829.JPG"><img src="DSC08829.JPG" alt=""></div>
+    <div class="grid-item" data-src="DSC09045.JPG"><img src="DSC09045.JPG" alt=""></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-monogram">Meng Xi Ping · 孟曦萍</div>
+  <img class="about-portrait" src="images/portrait.JPG" alt="Meng Fan-Ying">
+  <div class="about-name">Photographer</div>
+  <p class="about-bio">
+    Based in Hsinchu, moving to New York in 2026 for SVA MPS Fashion Photography.
+    My work focuses on the atmosphere of dining spaces — the way light lands on a table,
+    the quiet life between service, the textures that make a restaurant feel like somewhere worth staying.
+    I shoot available light whenever possible. The result is images that feel like a memory — not a menu.
+  </p>
+  <p class="about-bio-zh">
+    目前以新竹為基地，2026 年將前往紐約就讀 SVA MPS Fashion Photography。
+    我的作品聚焦在餐飲空間的氛圍——光線落在桌面的方式、服務空隙裡的靜謐、讓人想多待一會兒的質感。
+    我盡量以自然光拍攝。這樣的照片，感覺像一段記憶，不像一份菜單。
+  </p>
+  <div class="about-tags">
+    <span class="about-tag">Restaurant & Café</span>
+    <span class="about-tag">Food & Beverage</span>
+    <span class="about-tag">Brand Storytelling</span>
+    <span class="about-tag">Hsinchu · New York</span>
+  </div>
+</section>
+
+<!-- PROCESS & PACKAGES -->
+<section class="process" id="process">
+  <div class="process-header">
+    <h2 class="process-title">How we<br><em>work together.</em></h2>
+    <div class="process-sub">合作流程 & 方案</div>
+  </div>
+
+  <div class="process-steps">
+    <div>
+      <div class="step-num">01</div>
+      <div class="step-name">Brief</div>
+      <div class="step-name-zh">需求討論</div>
+      <div class="step-desc">We talk about your brand, the story you want to tell, and what you need the images for — Instagram, website, print, or all three.</div>
+      <div class="step-desc-zh">聊聊你的品牌故事、想傳達的氛圍，以及照片的用途——社群、官網或印刷物。</div>
+    </div>
+    <div>
+      <div class="step-num">02</div>
+      <div class="step-name">Scout</div>
+      <div class="step-name-zh">場勘規劃</div>
+      <div class="step-desc">I visit the space to understand the light, layout, and best shooting windows. We agree on a shoot day that works for your schedule.</div>
+      <div class="step-desc-zh">提前到場了解光線、空間配置與最佳拍攝時段，確認正式拍攝的時間安排。</div>
+    </div>
+    <div>
+      <div class="step-num">03</div>
+      <div class="step-name">Shoot</div>
+      <div class="step-name-zh">正式拍攝</div>
+      <div class="step-desc">On-location shoot using available light. I work quietly and efficiently — no bulky equipment, no disruption to your team or guests.</div>
+      <div class="step-desc-zh">以自然光進行現場拍攝，不需大型器材，不干擾正常營業與客人動線。</div>
+    </div>
+    <div>
+      <div class="step-num">04</div>
+      <div class="step-name">Deliver</div>
+      <div class="step-name-zh">交付成品</div>
+      <div class="step-desc">Edited selects delivered within 7 days via private gallery. Files optimized for web, social, and print — ready to use immediately.</div>
+      <div class="step-desc-zh">7 天內完成後製，透過私人圖庫交付。檔案針對社群、官網與印刷分別優化，可立即使用。</div>
+    </div>
+  </div>
+
+  <div class="packages">
+    <div class="pkg">
+      <div class="pkg-label">Package 01</div>
+      <div class="pkg-name">Social</div>
+      <div class="pkg-name-zh">社群方案</div>
+      <div class="pkg-price">NT$ 8,000</div>
+      <div class="pkg-price-sub">Starting price · 起價</div>
+      <ul class="pkg-features">
+        <li>2-hour shoot / 2 小時拍攝</li>
+        <li>30–40 photos / 30–40 張照片</li>
+        <li>Interior + 1–2 drink details</li>
+        <li>Instagram / social ready</li>
+      </ul>
+      <div class="pkg-note">Ideal for: seasonal updates, new menu launches<br>適合：換季更新、新菜單發布</div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-label">Package 02</div>
+      <div class="pkg-name">Brand</div>
+      <div class="pkg-name-zh">品牌方案</div>
+      <div class="pkg-price">NT$ 15,000</div>
+      <div class="pkg-price-sub">Starting price · 起價</div>
+      <ul class="pkg-features">
+        <li>Half day (4 hrs) / 半日拍攝</li>
+        <li>50 photos / 50 張照片</li>
+        <li>Space + food & drink + details</li>
+        <li>Web + social + print ready</li>
+      </ul>
+      <div class="pkg-note">Ideal for: new openings, brand refresh<br>適合：新店開幕、品牌形象更新</div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-label">Package 03</div>
+      <div class="pkg-name">Full Story</div>
+      <div class="pkg-name-zh">完整故事方案</div>
+      <div class="pkg-price">NT$ 30,000</div>
+      <div class="pkg-price-sub">Starting price · 起價</div>
+      <ul class="pkg-features">
+        <li>Full day (8 hrs) / 全日拍攝</li>
+        <li>100+ photos / 100+ 張照片</li>
+        <li>Complete brand library</li>
+        <li>Multiple lighting / sessions</li>
+        <li>Usage rights included / 著作授權含括</li>
+      </ul>
+      <div class="pkg-note">Ideal for: flagship stores, editorial features<br>適合：旗艦店、雜誌專題</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-left">
+    <h2>Let's work<br><em>together.</em></h2>
+    <div class="contact-email">xi.xi1999shot@gmail.com</div>
+  </div>
+  <div class="contact-right">
+    <div class="contact-ig"><a href="https://instagram.com/meng.shot_u" target="_blank">@meng.shot_u</a></div>
+    <div class="contact-location">Hsinchu · New York</div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <button class="lb-close" onclick="closeLb()">✕</button>
+  <button class="lb-prev" onclick="navLb(-1)">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-next" onclick="navLb(1)">›</button>
+</div>
+
+<script>
+  const items = [...document.querySelectorAll('.grid-item')];
+  const srcs = items.map(i => i.dataset.src);
+  let cur = 0;
+
+  items.forEach((el, i) => {
+    el.addEventListener('click', () => openLb(i));
+  });
+
+  function openLb(i) {
+    cur = i;
+    document.getElementById('lbImg').src = srcs[cur];
+    document.getElementById('lb').classList.add('open');
+  }
+  function closeLb() { document.getElementById('lb').classList.remove('open'); }
+  function navLb(d) {
+    cur = (cur + d + srcs.length) % srcs.length;
+    document.getElementById('lbImg').src = srcs[cur];
+  }
+  document.getElementById('lb').addEventListener('click', e => { if(e.target === e.currentTarget) closeLb(); });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape') closeLb();
+    if(e.key === 'ArrowLeft') navLb(-1);
+    if(e.key === 'ArrowRight') navLb(1);
+  });
+</script>
+</body>
+</html>
