@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meng Xi Ping — Photography</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400&family=Space+Mono&family=Dancing+Script:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400&family=Space+Mono&family=Dancing+Script:wght@400;500&family=Ma+Shan+Zheng&family=Great+Vibes&family=Pinyon+Script&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #F9F7F4;
@@ -219,9 +219,9 @@
       display: flex; align-items: center; justify-content: space-between;
     }
     .contact-left h2 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(32px, 4.5vw, 58px); font-weight: 300; line-height: 1.15;
-      letter-spacing: -1px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 66px); font-weight: 300; line-height: 1.1;
+      font-style: italic; letter-spacing: 0px;
       margin-bottom: 20px;
     }
     .contact-left h2 em { font-style: normal; opacity: 0.4; font-weight: 300; }
@@ -245,11 +245,25 @@
     .lb-next { right: 16px; }
 
     @media (max-width: 768px) {
-      nav { padding: 20px 24px; }
+      nav {
+        padding: 20px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .nav-tagline { display: none; }
+      .nav-name { font-size: 13px; letter-spacing: 4px; white-space: nowrap; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 8px; letter-spacing: 2px; }
       .grid-section, .about, .contact { padding: 56px 24px; }
       .about { grid-template-columns: 1fr; gap: 40px; }
       .contact { flex-direction: column; gap: 32px; text-align: left; }
       .contact-right { text-align: left; }
+
+      /* Hero side tag */
+      .hero-side-tag {
+        display: none;
+      }
 
       /* Hero — full bleed on mobile */
       .hero {
@@ -281,16 +295,57 @@
         margin-top: 0;
         padding: 0 24px;
       }
+      .hero-side-tag {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        left: 20px;
+        top: 38%;
+        transform: translateY(-50%);
+        gap: 2px;
+      }
+      .tag-script {
+        font-family: 'Dancing Script', cursive;
+        font-size: 24px;
+        color: rgba(255,255,255,0.65);
+        line-height: 1.2;
+      }
+      .tag-serif {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 58px;
+        font-weight: 300;
+        color: rgba(255,255,255,0.9);
+        line-height: 0.9;
+        letter-spacing: -1px;
+      }
+      .tag-small {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 9px;
+        font-weight: 300;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.5);
+        margin-top: 14px;
+      }
       .hero-caption {
-        font-size: 22px;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 300;
+        font-size: 13px;
+        letter-spacing: 3px;
+        text-transform: none;
         bottom: 88px;
-        color: #fff;
-        text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+        color: rgba(255,255,255,0.65);
+        text-shadow: none;
       }
       .hero-caption-zh {
-        bottom: 56px;
-        color: rgba(255,255,255,0.7);
-        letter-spacing: 6px;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 300;
+        font-size: 11px;
+        bottom: 60px;
+        color: rgba(255,255,255,0.45);
+        letter-spacing: 5px;
       }
     }
   </style>
@@ -315,7 +370,12 @@
   <div class="hero-photo-frame">
     <img src="images/DSC08503.JPG" alt="">
   </div>
-  <p class="hero-caption">every space holds a story worth remembering</p>
+  <div class="hero-side-tag">
+    <span class="tag-script">Restaurant &</span>
+    <span class="tag-serif">Space</span>
+    <span class="tag-small">photography</span>
+  </div>
+  <p class="hero-caption">Every space holds a story worth remembering</p>
   <p class="hero-caption-zh">每個空間都藏著值得記憶的故事</p>
 </section>
 
